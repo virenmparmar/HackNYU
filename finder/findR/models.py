@@ -13,3 +13,7 @@ class ItemListings(models.Model):
     latitude = models.FloatField()
     status = models.CharField(max_length=1)
     rating = models.IntegerField()
+
+class PictureDetails(models.Model):
+    name = models.CharField(max_length=200)
+    picture = models.FileField(upload_to='media/')

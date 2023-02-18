@@ -2,3 +2,4 @@ __pycache__/
 finder/findR/migrations/
 finder/db.sqlite3
 db.sqlite3
+finder/.env
