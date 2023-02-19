@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+	<h1>Browsing Posts</h1>
+
+	<form action="#" method="GET">
+		<label for="filter-location">Location:</label>
+		<input type="text" id="filter-location" name="location">
+		<br>
+
+		<label for="filter-tags">Tags:</label>
+		<input type="text" id="filter-tags" name="tags">
+		<br>
+
+		<input type="submit" value="Filter">
+	</form>
+
+	<hr>
+
+	<h2>Filtered Posts</h2>
+
+	<ul>
+		<!-- Loop through the filtered posts and display them as list items -->
+		<!-- You will need to generate this list dynamically on the server-side using a programming language -->
+		<li>
+			<h3>Post Title</h3>
+			<p>Post Content</p>
+			<p>Location: Post Location</p>
+			<p>Tags: Tag1, Tag2, Tag3</p>
+		</li>
+		<li>
+			<h3>Post Title</h3>
+			<p>Post Content</p>
+			<p>Location: Post Location</p>
+			<p>Tags: Tag1, Tag2, Tag3</p>
+		</li>
+		<li>
+			<h3>Post Title</h3>
+			<p>Post Content</p>
+			<p>Location: Post Location</p>
+			<p>Tags: Tag1, Tag2, Tag3</p>
+		</li>
+	</ul>
+</div>>
+
+{% endblock %}
