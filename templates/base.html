@@ -42,6 +42,7 @@
   <p>Find and post items you find out on the street!</p> 
 </div>
 
+{% if not user.is_authenticated %}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
         <ul class="navbar-nav">
@@ -49,13 +50,7 @@
                 <a class="nav-link active" href="#">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Browse</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Post</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Request</a>
+                <a class="nav-link" href="{%url 'findR:browse' %}">Browse</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{%url 'findR:login' %}">Log in</a>
@@ -66,6 +61,27 @@
         </ul>
     </div>
 </nav>
+{% endif %}
+{% if user.is_authenticated %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'findR:browse' %}">Browse</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'findR:add_listing' %}">Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{%url 'findR:logout' %}">Log Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endif %}
 
 <div id="root">{% block content %} {% endblock %}</div>
 
