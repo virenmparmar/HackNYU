@@ -14,3 +14,6 @@ class ItemListings(models.Model):
     latitude = models.FloatField()
     status = models.CharField(max_length=1)
     rating = models.IntegerField()
+    title = models.CharField(max_length=200)
+    decription = models.CharField(max_length=500)
+    
