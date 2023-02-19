@@ -68,10 +68,18 @@ def add_listing(request):
 def browse(request):
     if(request.method == "POST"):
         try:
-            items = ItemListings.objects.filter(
-                latitude__range=(float(request.POST["post-latitude"])-1,float(request.POST["post-latitude"])+1),
-                longitutude__range=(float(request.POST["post-longitude"])-1,float(request.POST["post-longitude"])+1),
-            )
+            print(request.POST)
+            if request.POST["tags"] != "":
+                items = ItemListings.objects.filter(
+                    latitude__range=(float(request.POST["post-latitude"])-1,float(request.POST["post-latitude"])+1),
+                    longitutude__range=(float(request.POST["post-longitude"])-1,float(request.POST["post-longitude"])+1),
+                    title__contains=request.POST["tags"]
+                )
+            else: 
+                items = ItemListings.objects.filter(
+                    latitude__range=(float(request.POST["post-latitude"])-1,float(request.POST["post-latitude"])+1),
+                    longitutude__range=(float(request.POST["post-longitude"])-1,float(request.POST["post-longitude"])+1)
+                )
             print(items)
             return render(request, "browse.html", {"items": items})
         except Exception as e:
