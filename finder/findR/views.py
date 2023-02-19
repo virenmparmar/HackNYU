@@ -57,6 +57,7 @@ def add_listing(request):
         latitude=request.POST["post-latitude"],
         status='A',
         rating=0,
+        title=request.POST["post-title"],
         )
         message = "Listing added"
         return render(request, "add_listing.html", {"message": message, "file_url": file_url})
@@ -67,18 +68,16 @@ def add_listing(request):
 def browse(request):
     if(request.method == "POST"):
         try:
-            ItemListings.objects.create(
-            user_id=User.objects.get(username=request.POST["username"]),
-            photo_path=request.POST["photo_path"],
-            longitutude=request.POST["longitude"],
-            latitude=request.POST["latitude"],
-            status=request.POST["status"],
-            rating=request.POST["rating"],
+            items = ItemListings.objects.filter(
+                latitude__range=(float(request.POST["post-latitude"])-1,float(request.POST["post-latitude"])+1),
+                longitutude__range=(float(request.POST["post-longitude"])-1,float(request.POST["post-longitude"])+1),
             )
-            message = "Listing added"
-            return render(request, "login.html", {"message": message})
-        except:
+            print(items)
+            return render(request, "browse.html", {"items": items})
+        except Exception as e:
+            print(e)
             message = "Invalid username"
+            return render(request, "browse.html", {"message": message})
             
     else:
         return render(request, "browse.html")

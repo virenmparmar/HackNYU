@@ -4,45 +4,59 @@
 
 <div>
 	<h1>Browsing Posts</h1>
+	<p> Your present location is around this place.</p>
+	<!-- <iframe id="map" width="600" height="450" frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/view?key=&zoom=14"
+    allowfullscreen></iframe> -->
+	<form action="#" method="POST">
+		{% csrf_token %}
+		<label for="filter-location">Location:</label> <br>
+		<input type="text" id="post-latitude" name="post-latitude" readonly="true"><br>
+		<input type="text" id="post-longitude" name="post-longitude" readonly="true"><br>
 
-	<form action="#" method="GET">
-		<label for="filter-location">Location:</label>
-		<input type="text" id="filter-location" name="location">
 		<br>
 
-		<label for="filter-tags">Tags:</label>
+		<label for="filter-tags">Tags:</label> <br>
 		<input type="text" id="filter-tags" name="tags">
 		<br>
+		<br>
 
-		<input type="submit" value="Filter">
+		<input type="submit" value="Find">
 	</form>
-
+	{% if items %}
+		{% for item in items %}
+			<div>
+				<h2>{{ item.title }}</h2>
+				<p>Location: {{ item.latitude }}, {{ item.longitutude }}</p>
+				<p>Photo:</p>
+					<img src="{{ image.url }}" class="img-fluid">
+			</div>
+		{% endfor %}
+	{% else %}
+		<p> No items found </p>
+	{% endif %}
 	<hr>
-
-	<h2>Filtered Posts</h2>
-
-	<ul>
-		<!-- Loop through the filtered posts and display them as list items -->
-		<!-- You will need to generate this list dynamically on the server-side using a programming language -->
-		<li>
-			<h3>Post Title</h3>
-			<p>Post Content</p>
-			<p>Location: Post Location</p>
-			<p>Tags: Tag1, Tag2, Tag3</p>
-		</li>
-		<li>
-			<h3>Post Title</h3>
-			<p>Post Content</p>
-			<p>Location: Post Location</p>
-			<p>Tags: Tag1, Tag2, Tag3</p>
-		</li>
-		<li>
-			<h3>Post Title</h3>
-			<p>Post Content</p>
-			<p>Location: Post Location</p>
-			<p>Tags: Tag1, Tag2, Tag3</p>
-		</li>
-	</ul>
-</div>>
+	<script src="https://maps.googleapis.com/maps/api/js?key=&&callback=initMap"></script>
+	<script>
+		navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = 40.694682;
+          var longitude = -73.9858714;
+          latitude = position.coords.latitude;
+          longitude = position.coords.longitude;
+		  var post_latitude = document.getElementById("post-latitude");
+		  post_latitude.value = latitude;
+		  var post_longitude = document.getElementById("post-longitude");
+		  post_longitude.value = longitude;
+          // Set the center of the map to the user's location
+          const map = document.getElementById('map');
+          const url = new URL(map.src);
+          url.searchParams.set('center', `${latitude},${longitude}`);
+          map.src = url.toString();
+        });
+        
+	</script>
+	</script>
+	
+</div>
 
 {% endblock %}

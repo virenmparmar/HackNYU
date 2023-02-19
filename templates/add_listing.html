@@ -83,25 +83,7 @@
           url.searchParams.set('center', `${latitude},${longitude}`);
           map.src = url.toString();
         });
-        function initMap() {
-        // map creation and marker code her
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 40.694682, lng: -73.9858714},
-                zoom: 13
-            });
-            var marker1 = new google.maps.Marker({
-                position: {lat: 40.694682, lng: -73.9858720},
-                map: map,
-                title: 'San Francisco'
-            });
-    
-            var marker2 = new google.maps.Marker({
-                position: {lat: 40.694682, lng: -73.9858720},
-                map: map,
-                title: 'Golden Gate Bridge'
-            });
-        };
-        window.addEventListener('load', initMap);
+        
 	</script>
 </div>
 {% endblock %}
