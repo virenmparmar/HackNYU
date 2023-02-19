@@ -59,7 +59,7 @@ def add_listing(request):
         rating=0,
         )
         message = "Listing added"
-        return render(request, "login.html", {"message": message, "file_url": file_url})
+        return render(request, "add_listing.html", {"message": message, "file_url": file_url})
     message = "Invalid username"
     return render(request, "add_listing.html")
         

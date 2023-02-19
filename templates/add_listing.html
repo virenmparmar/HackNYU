@@ -3,6 +3,7 @@
 
 {% block content %}
 <div>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGTiNsRZPacwWfXjscZ0PJICn8n9ZQDtU&&callback=initMap"></script>
     <style>
 		.preview {
 			display: flex;
@@ -16,13 +17,11 @@
 		}
 	</style>
     <title>Add an item for donating</title>
-
+	<iframe id="map" width="600" height="450" frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAGTiNsRZPacwWfXjscZ0PJICn8n9ZQDtU&zoom=14"
+    allowfullscreen></iframe>
 	<form action="#" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
-		<div class="mb-3">
-			<label for="username" class="form-label">Username</label>
-			<input type = "text", id="username", name="username", value="{% user %}">
-		</div>
 
 		<label for="post-title">Tell us what is it you are donating:</label><br>
 		<input type="text" id="post-title" name="post-title"><br>
@@ -32,10 +31,10 @@
 		<div class="preview"></div>
 
 		<label for="post-latitude">Latitude:</label><br>
-		<input type="text" id="post-latitude" name="post-latitude"><br>
+		<input type="text" id="post-latitude" name="post-latitude" readonly="true"><br>
 
         <label for="post-longitude">Longitude:</label><br>
-		<input type="text" id="post-longitude" name="post-longitude"><br>
+		<input type="text" id="post-longitude" name="post-longitude" readonly="true"><br>
 
 		<input type="submit" value="Submit">
 	</form>
@@ -69,6 +68,40 @@
 				}
 			}
 		}
+		navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = 40.694682;
+          var longitude = -73.9858714;
+          latitude = position.coords.latitude;
+          longitude = position.coords.longitude;
+		  var post_latitude = document.getElementById("post-latitude");
+		  post_latitude.value = latitude;
+		  var post_longitude = document.getElementById("post-longitude");
+		  post_longitude.value = longitude;
+          // Set the center of the map to the user's location
+          const map = document.getElementById('map');
+          const url = new URL(map.src);
+          url.searchParams.set('center', `${latitude},${longitude}`);
+          map.src = url.toString();
+        });
+        function initMap() {
+        // map creation and marker code her
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 40.694682, lng: -73.9858714},
+                zoom: 13
+            });
+            var marker1 = new google.maps.Marker({
+                position: {lat: 40.694682, lng: -73.9858720},
+                map: map,
+                title: 'San Francisco'
+            });
+    
+            var marker2 = new google.maps.Marker({
+                position: {lat: 40.694682, lng: -73.9858720},
+                map: map,
+                title: 'Golden Gate Bridge'
+            });
+        };
+        window.addEventListener('load', initMap);
 	</script>
 </div>
 {% endblock %}
