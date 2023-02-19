@@ -48,3 +48,23 @@ def add_listing(request):
         
     else:
         return render(request, "add_listing.html")
+    
+def browse(request):
+    if(request.method == "POST"):
+        try:
+            ItemListings.objects.create(
+            user_id=User.objects.get(username=request.POST["username"]),
+            photo_path=request.POST["photo_path"],
+            longitutude=request.POST["longitude"],
+            latitude=request.POST["latitude"],
+            status=request.POST["status"],
+            rating=request.POST["rating"],
+            )
+            message = "Listing added"
+            return render(request, "login.html", {"message": message})
+        except:
+            message = "Invalid username"
+            
+    else:
+        return render(request, "browse.html")
+        
