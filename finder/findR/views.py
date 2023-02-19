@@ -41,7 +41,7 @@ def add_listing(request):
             rating=request.POST["rating"],
             )
             message = "Listing added"
-            return render(request, "add_listing.html", {"message": message})
+            return render(request, "login.html", {"message": message})
         except:
             message = "Invalid username"
             return render(request, "add_listing.html", {"message": message})
