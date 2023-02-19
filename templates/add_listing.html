@@ -17,12 +17,18 @@
 	</style>
     <title>Add an item for donating</title>
 
-	<form action="#" method="POST">
+	<form action="#" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="username" class="form-label">Username</label>
+			<input type = "text", id="username", name="username", value="{% user %}">
+		</div>
+
 		<label for="post-title">Tell us what is it you are donating:</label><br>
 		<input type="text" id="post-title" name="post-title"><br>
 
 		<label for="post-photos">Photos:</label><br>
-		<input type="file" id="post-photos" name="post-photos" multiple onchange="previewPhotos(event)"><br>
+		<input type="file" id="post-photos" name="post-photos" accepts="image/*" multiple onchange="previewPhotos(event)"><br>
 		<div class="preview"></div>
 
 		<label for="post-latitude">Latitude:</label><br>
@@ -33,6 +39,18 @@
 
 		<input type="submit" value="Submit">
 	</form>
+
+	<h2>Uploaded File</h2>
+	<div>
+		{% if file_url %}
+		<div>
+			<p>Uploaded to:<a href="{{ file_url }}">{{ file_url }}</a></p>
+			<img src="{{ file_url }}" class="img-fluid">
+		</div>
+		{% else %}
+		<p> No Picture Added </p>
+		{% endif %}
+	</div>
 
 
 	<script>
