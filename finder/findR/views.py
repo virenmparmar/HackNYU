@@ -7,7 +7,7 @@ from .models import ItemListings, User
 from django.contrib.auth.hashers import make_password
 
 def index(request):
-    return render(request, "base.html")
+    return render(request, "home.html")
 
 
 def register(request):
