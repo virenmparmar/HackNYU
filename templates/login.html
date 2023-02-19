@@ -2,21 +2,21 @@
 
 {% block content %}
 
-
-<h1>Login</h1>
-<form action="{% url 'findR:login' %}" class="login" method="POST">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type = "text", id="username", name="username">
-    </div>
-    <div>
-        <label for="password" class="form-label">Password</label>
-        <input type = "password", id="password", name="password">
-    </div>
-    <input type="submit" class="btn btn-primary">
-</form>
-
+<h2 class="text-center">Login</h2>
+<div class="d-flex justify-content-center align-items-center">
+    <form action="{% url 'findR:login' %}" class="login" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type = "text", id="username", name="username">
+        </div>
+        <div>
+            <label for="password" class="form-label">Password</label>
+            <input type = "password", id="password", name="password">
+        </div>
+        <input type="submit" class="btn btn-primary" style="background-color: #678CAD;">
+    </form>
+</div>
 {% if message %}
 <p> {{ message }} </p>
 {% endif %}

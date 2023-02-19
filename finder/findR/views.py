@@ -89,4 +89,3 @@ def browse(request):
             
     else:
         return render(request, "browse.html")
-        

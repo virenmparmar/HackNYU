@@ -3,8 +3,8 @@
 
 
 {% block content %}
-<h1>Register</h1>
-<div>
+<h2 class="text-center">Register</h2>
+<div class="d-flex justify-content-center align-items-center">
     <form method="POST" action="{% url 'findR:register' %}">
         {% csrf_token %}
             <label for="username">Username</label>
@@ -31,7 +31,7 @@
             <input type="password" name="password2" id="password2" required>
             <br>
             <br>
-            <input type="submit" value="Register">
+            <input type="submit" value="Register" class="btn btn-primary" style="background-color: #678CAD;">
 
     </form>
         
