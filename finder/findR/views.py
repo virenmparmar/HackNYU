@@ -22,12 +22,19 @@ def register(request):
 
 def login(request):
     if(request.method == "POST"):
-        user = User.objects.get(username=request.POST["username"])
-        if(user.check_password(request.POST["password"])):
-            return render(request, "add_listing.html")
-    else:
-        message = "Invalid username or password"
-        return render(request, "login.html", {"message": message})
+        print(request.POST)
+        try:
+            user = User.objects.get(username=request.POST["username"])
+            if(user.check_password(request.POST["password"])):
+                return render(request, "add_listing.html")
+            else:
+                message = "Invalid password"
+                return render(request, "login.html", {"message": message})
+        except:
+            message = "Username doesn't exist"
+            return render(request, "login.html", {"message": message})
+    elif(request.method == "GET"):
+        return render(request, "login.html")
 
 def add_listing(request):
     if(request.method == "POST"):
