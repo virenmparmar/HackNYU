@@ -3,7 +3,7 @@
 
 {% block content %}
 <div>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGTiNsRZPacwWfXjscZ0PJICn8n9ZQDtU&&callback=initMap"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=&&callback=initMap"></script>
     <style>
 		.preview {
 			display: flex;
@@ -18,7 +18,7 @@
 	</style>
     <title>Add an item for donating</title>
 	<iframe id="map" width="600" height="450" frameborder="0" style="border:0"
-    src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAGTiNsRZPacwWfXjscZ0PJICn8n9ZQDtU&zoom=14"
+    src="https://www.google.com/maps/embed/v1/view?key=&zoom=14"
     allowfullscreen></iframe>
 	<form action="#" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
